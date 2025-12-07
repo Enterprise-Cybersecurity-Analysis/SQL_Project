@@ -157,11 +157,12 @@ DB_CONFIG = {
 
 ## 👥 Team Information
 
+**Team Name:** Syntax Soldiers
+
 **Group Members:**
-1. [Name - Role]
-2. [Name - Role]
-3. [Name - Role]
-4. [Name - Role]
+1. Swasthika Rajendran
+2. Moses Kanagaraj
+3. Riya Gupta
 
 ---
 
