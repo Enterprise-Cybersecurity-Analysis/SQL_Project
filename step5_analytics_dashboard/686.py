@@ -1170,153 +1170,146 @@ dashboard_html = f"""<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDM Project Dashboard - Syntax Soldiers</title>
+    <title>SOC Analytics Dashboard - Enterprise Cybersecurity</title>
     <style>
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
         
         body {{
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f7fa;
+            color: #2c3e50;
+            line-height: 1.6;
         }}
         
         .container {{
-            max-width: 1900px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            overflow: hidden;
         }}
         
         header {{
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: white;
-            padding: 50px 40px;
-            text-align: center;
+            padding: 60px 50px;
+            border-bottom: 4px solid #0f3460;
         }}
         
         header h1 {{
-            font-size: 3.5em;
-            margin-bottom: 15px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            font-size: 2.8em;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
         }}
         
         header .subtitle {{
-            font-size: 1.3em;
-            opacity: 0.95;
-            margin-bottom: 20px;
+            font-size: 1em;
+            opacity: 0.9;
+            margin-top: 15px;
+            font-weight: 300;
         }}
         
-        header .info {{
-            font-size: 1em;
+        .team-info {{
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }}
+        
+        .team-info p {{
+            font-size: 0.95em;
             opacity: 0.85;
-            margin-top: 15px;
+            margin: 8px 0;
         }}
         
         .metrics {{
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 40px;
-            border-bottom: 4px solid #dee2e6;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            background: white;
+            border-bottom: 1px solid #e8ecef;
         }}
         
         .metric {{
             text-align: center;
-            padding: 30px 20px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            padding: 40px 20px;
+            border-right: 1px solid #e8ecef;
         }}
         
-        .metric:hover {{
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        .metric:last-child {{
+            border-right: none;
         }}
         
         .metric-value {{
-            font-size: 3em;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 3.2em;
+            font-weight: 200;
+            color: #0f3460;
             margin-bottom: 10px;
         }}
         
         .metric-label {{
-            font-size: 1.1em;
-            color: #6c757d;
+            font-size: 0.85em;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             font-weight: 500;
         }}
         
         .content {{
-            padding: 50px 40px;
-        }}
-        
-        .info-box {{
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-            border-left: 6px solid #0c5460;
-            color: #0c5460;
-            padding: 25px 30px;
-            border-radius: 10px;
-            margin-bottom: 40px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }}
-        
-        .info-box h3 {{
-            margin-bottom: 15px;
-            font-size: 1.4em;
+            padding: 50px;
         }}
         
         .chart-section {{
-            margin-bottom: 60px;
-            border: 3px solid #e9ecef;
-            border-radius: 15px;
-            overflow: hidden;
+            margin-bottom: 50px;
             background: white;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
-            transition: all 0.3s ease;
+            border: 1px solid #e8ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
         }}
         
         .chart-section:hover {{
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
         }}
         
         .chart-header {{
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px 35px;
-            font-size: 1.5em;
-            font-weight: 600;
+            background: #fafbfc;
+            color: #2c3e50;
+            padding: 24px 30px;
+            font-size: 1.3em;
+            font-weight: 500;
+            border-bottom: 1px solid #e8ecef;
         }}
         
         .chart-img {{
             width: 100%;
             display: block;
             background: white;
-            padding: 20px;
+            padding: 30px;
         }}
         
         footer {{
-            background: linear-gradient(135deg, #343a40 0%, #212529 100%);
-            color: white;
+            background: #1a1a2e;
+            color: #bdc3c7;
             text-align: center;
-            padding: 40px;
+            padding: 50px;
+            border-top: 4px solid #0f3460;
         }}
         
         footer p {{
-            margin: 12px 0;
-            font-size: 1.1em;
+            margin: 10px 0;
+            font-size: 0.95em;
         }}
         
-        .highlight {{
-            color: #667eea;
-            font-weight: 600;
+        footer strong {{
+            color: white;
+            font-weight: 500;
+        }}
+        
+        .timestamp {{
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85em;
+            opacity: 0.7;
         }}
     </style>
 </head>
@@ -1324,17 +1317,13 @@ dashboard_html = f"""<!DOCTYPE html>
     <div class="container">
         <header>
             <h1>Enterprise Cybersecurity Incident & Threat Intelligence Analysis</h1>
-            <p class="info">
-                <strong>Team:</strong> Syntax Soldiers | 
-                <strong>Members:</strong> Swasthika Rajendran, Moses Kanagaraj, Riya Gupta
-            </p>
-            <p class="info">
-                <strong>Database:</strong> AWS RDS MySQL 8.4.7 | 
-                <strong>Server:</strong> soc-db-instance.us-east-1.rds.amazonaws.com
-            </p>
-            <p class="info">
-                MIS686 Term Project | Generated: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}
-            </p>
+            <p class="subtitle">Security Operations Center (SOC) Analytics Dashboard</p>
+            
+            <div class="team-info">
+                <p><strong>Team:</strong> Syntax Soldiers</p>
+                <p><strong>Members:</strong> Swasthika Rajendran, Moses Kanagaraj, Riya Gupta</p>
+                <p><strong>Database:</strong> AWS RDS MySQL 8.4.7 | soc-db-instance.us-east-1.rds.amazonaws.com</p>
+            </div>
         </header>
 
         <div class="metrics">
@@ -1344,7 +1333,7 @@ dashboard_html = f"""<!DOCTYPE html>
             </div>
             <div class="metric">
                 <div class="metric-value">8</div>
-                <div class="metric-label">Matplotlib Charts</div>
+                <div class="metric-label">Visualizations</div>
             </div>
             <div class="metric">
                 <div class="metric-value">14</div>
@@ -1352,17 +1341,11 @@ dashboard_html = f"""<!DOCTYPE html>
             </div>
             <div class="metric">
                 <div class="metric-value">AWS</div>
-                <div class="metric-label">Cloud RDS</div>
+                <div class="metric-label">Cloud Platform</div>
             </div>
         </div>
 
         <div class="content">
-            <div class="info-box">
-                <h3>🎯 Dashboard Features</h3>
-                <p><strong>High-Quality PNG Charts:</strong> All visualizations generated with Matplotlib at 300 DPI resolution</p>
-                <p><strong>Connected to AWS RDS:</strong> Real-time data from production MySQL database</p>
-            </div>
-
             <div class="chart-section">
                 <div class="chart-header">Q1: Departmental Risk Density – Quadrant Analysis</div>
                 <img src="charts/q1_department_risk.png" class="chart-img" alt="Q1 Chart">
@@ -1405,19 +1388,18 @@ dashboard_html = f"""<!DOCTYPE html>
         </div>
 
         <footer>
-            <p><strong>MIS686 Enterprise Database Management - Term Project</strong></p>
+            <p><strong>MIS686 Enterprise Database Management</strong></p>
             <p>Enterprise Cybersecurity Incident & Threat Intelligence System</p>
-            <p style="margin-top: 20px;">
-                All visualizations generated with <span class="highlight">Matplotlib</span><br>
-                Connected to <span class="highlight">AWS RDS MySQL 8.4.7</span> Production Database
-            </p>
+            <p>Syntax Soldiers © 2025</p>
+            
+            <p class="timestamp">Generated: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}</p>
         </footer>
     </div>
 </body>
 </html>"""
 
 # Save dashboard
-dashboard_path = 'MATPLOTLIB_DASHBOARD.html'
+dashboard_path = 'final_dashboard.html'
 with open(dashboard_path, 'w', encoding='utf-8') as f:
     f.write(dashboard_html)
 
@@ -1427,6 +1409,9 @@ print("🌐 Opening dashboard in browser...")
 print("="*70)
 
 # Open in browser
+webbrowser.open('file://' + os.path.abspath(dashboard_path))
+
+print("\n[SUCCESS] All done! Dashboard with all Matplotlib charts generated successfully!")
 webbrowser.open('file://' + os.path.abspath(dashboard_path))
 
 print("\n[SUCCESS] All done! Dashboard with all Matplotlib charts generated successfully!")
