@@ -600,7 +600,7 @@ df = pd.read_sql("SELECT * FROM incidents WHERE severity='critical'", engine)
 
 ### ⭐ **Star this repository if you find it helpful!**
 
-[![GitHub stars](https://img.shields.io/github/stars/swasthi-raj/Enterprise-Cybersecurity-Analysis?style=social)](https://github.com/swasthi-raj/Enterprise-Cybersecurity-Analysis)
+[![GitHub stars](https://img.shields.io/github/stars/Enterprise-Cybersecurity-Analysis/SQL_Project?style=social)](https://github.com/Enterprise-Cybersecurity-Analysis/SQL_Project)
 
 ---
 
