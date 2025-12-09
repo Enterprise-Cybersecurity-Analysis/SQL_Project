@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOC Analytics Dashboard - Enterprise Cybersecurity</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f7fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 60px 50px;
+            border-bottom: 4px solid #0f3460;
+        }
+        
+        header h1 {
+            font-size: 2.8em;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+        
+        header .subtitle {
+            font-size: 1em;
+            opacity: 0.9;
+            margin-top: 15px;
+            font-weight: 300;
+        }
+        
+        .team-info {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .team-info p {
+            font-size: 0.95em;
+            opacity: 0.85;
+            margin: 8px 0;
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            background: white;
+            border-bottom: 1px solid #e8ecef;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 40px 20px;
+            border-right: 1px solid #e8ecef;
+        }
+        
+        .metric:last-child {
+            border-right: none;
+        }
+        
+        .metric-value {
+            font-size: 3.2em;
+            font-weight: 200;
+            color: #0f3460;
+            margin-bottom: 10px;
+        }
+        
+        .metric-label {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 50px;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .chart-section {
+            background: white;
+            border: 1px solid #e8ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .chart-section:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        
+        .chart-header {
+            background: #fafbfc;
+            color: #2c3e50;
+            padding: 18px 24px;
+            font-size: 1.1em;
+            font-weight: 500;
+            border-bottom: 1px solid #e8ecef;
+        }
+        
+        .chart-img {
+            width: 100%;
+            display: block;
+            background: white;
+            padding: 20px;
+        }
+        
+        footer {
+            background: #1a1a2e;
+            color: #bdc3c7;
+            text-align: center;
+            padding: 50px;
+            border-top: 4px solid #0f3460;
+        }
+        
+        footer p {
+            margin: 10px 0;
+            font-size: 0.95em;
+        }
+        
+        footer strong {
+            color: white;
+            font-weight: 500;
+        }
+        
+        .timestamp {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85em;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Enterprise Cybersecurity Incident & Threat Intelligence Analysis</h1>
+            <p class="subtitle">Security Operations Center (SOC) Analytics Dashboard</p>
+            
+            <div class="team-info">
+                <p><strong>Team:</strong> Syntax Soldiers</p>
+                <p><strong>Members:</strong> Swasthika Rajendran, Moses Kanagaraj, Riya Gupta</p>
+                <p><strong>Database:</strong> AWS RDS MySQL 8.4.7 | soc-db-instance.us-east-1.rds.amazonaws.com</p>
+            </div>
+        </header>
+
+        <div class="metrics">
+            <div class="metric">
+                <div class="metric-value">8</div>
+                <div class="metric-label">Analytical Questions</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">8</div>
+                <div class="metric-label">Visualizations</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">12</div>
+                <div class="metric-label">Database Tables</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">AWS</div>
+                <div class="metric-label">Cloud Platform</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="charts-grid">
+                <div class="chart-section">
+                    <div class="chart-header">Q1: Departmental Risk Density</div>
+                    <img src="charts/q1_department_risk.png" class="chart-img" alt="Q1 Chart">
+                </div>
+
+                <div class="chart-section">
+                    <div class="chart-header">Q2: MTTD/MTTC/MTTR Analysis</div>
+                    <img src="charts/q2_mttd_mttc_mttr.png" class="chart-img" alt="Q2 Chart">
+                </div>
+
+                <div class="chart-section">
+                    <div class="chart-header">Q3: Threat Actor Mapping</div>
+                    <img src="charts/q3_threat_actors.png" class="chart-img" alt="Q3 Chart">
+                </div>
+
+                <div class="chart-section">
+                    <div class="chart-header">Q4: Network Traffic Analysis</div>
+                    <img src="charts/q4_network_traffic.png" class="chart-img" alt="Q4 Chart">
+                </div>
+
+                <div class="chart-section">
+                    <div class="chart-header">Q5: Alert Escalation Rate</div>
+                    <img src="charts/q5_escalation_rate.png" class="chart-img" alt="Q5 Chart">
+                </div>
+
+                <div class="chart-section">
+                    <div class="chart-header">Q6: User Alerts by Privilege</div>
+                    <img src="charts/q6_user_privilege.png" class="chart-img" alt="Q6 Chart">
+                </div>
+
+                <div class="chart-section">
+                    <div class="chart-header">Q7: IOC Confidence & Impact</div>
+                    <img src="charts/q7_ioc_analysis.png" class="chart-img" alt="Q7 Chart">
+                </div>
+
+                <div class="chart-section">
+                    <div class="chart-header">Q8: Temporal Alert Spikes</div>
+                    <img src="charts/q8_temporal_spikes.png" class="chart-img" alt="Q8 Chart">
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>MIS686 Enterprise Database Management</strong></p>
+            <p>Enterprise Cybersecurity Incident & Threat Intelligence System</p>
+            <p>Syntax Soldiers © 2025</p>
+            
+            <p class="timestamp">Generated: December 08, 2025 at 02:10 PM</p>
+        </footer>
+    </div>
+</body>
+</html>
