@@ -79,7 +79,7 @@ df = pd.DataFrame(data)
 df_melt = df.melt('severity', var_name='Metric', value_name='Hours')
 
 # Define a consistent ordering for the severity levels
-severity_order = ['low', 'medium', 'high', 'critical']
+severity_order = ['critical', 'high', 'medium', 'low']
 df_melt['severity'] = pd.Categorical(df_melt['severity'], categories=severity_order, ordered=True)
 df_melt = df_melt.sort_values('severity')
 
@@ -170,10 +170,6 @@ HAVING incident_count > 0
 ORDER BY incident_count DESC;
 """
 
-# ==============================================================================
-# 2. Simulated SQL Query Results (Data Preparation)
-# This DataFrame simulates the output of the new SQL query.
-# ==============================================================================
 data = {
     'threat_actor': ['Lazarus Group', 'ShadowBrokers', 'APT41', 'DarkTide', 'Fancy Bear', 'CyberVigil'],
     'motivation': ['Financial', 'Financial', 'Espionage', 'Financial', 'Espionage', 'Activism'],
@@ -302,11 +298,6 @@ GROUP BY nl.src_ip, a.hostname
 ORDER BY log_count DESC;
 """
 
-# ==============================================================================
-# 2. Simulated SQL Query Results (Data Preparation)
-# This DataFrame simulates the output of the new SQL query (Q7).
-# We focus on the top 5 IPs/Hostnames.
-# ==============================================================================
 data = {
     'src_ip': ['192.168.1.10', '10.0.0.50', '172.16.2.20', '192.168.1.1', '8.8.8.8'],
     'hostname': ['USER-PC-01', 'SERVER-DB', 'DEV-WORKSTATION', 'GATEWAY', 'DNS-GOOGLE'],
@@ -433,10 +424,6 @@ GROUP BY ta.actor_id
 ORDER BY incidents_linked DESC;
 """
 
-# ==============================================================================
-# 2. Simulated SQL Query Results (Data Preparation)
-# This DataFrame simulates the output of the first SQL query (Alert Escalation).
-# ==============================================================================
 data = {
     'severity': ['critical', 'high', 'medium', 'low'],
     'total_alerts': [50, 250, 1500, 10000],
@@ -564,10 +551,6 @@ GROUP BY ua.account_id
 ORDER BY severe_incidents DESC;
 """
 
-# ==============================================================================
-# 2. Simulated SQL Query Results (Data Preparation)
-# This DataFrame simulates a roll-up of Query A (Alert Analysis) by Department.
-# ==============================================================================
 data_dept = {
     'department': ['Engineering', 'Finance', 'Marketing', 'Sales', 'HR', 'Executive'],
     'total_alerts': [8500, 1200, 500, 300, 150, 50],
@@ -658,11 +641,6 @@ GROUP BY ioc.ioc_type
 ORDER BY incident_count DESC, avg_confidence DESC;
 """
 
-# ==============================================================================
-# 2. Simulated SQL Query Results (Data Preparation)
-# This DataFrame simulates the output of the new SQL query (IOC Analysis).
-# Confidence scores are typically 0-100 or 0.0-1.0. We'll use 0-100.
-# ==============================================================================
 data_ioc = {
     'ioc_type': ['IP', 'Domain', 'Hash', 'URL', 'Email'],
     'incident_count': [450, 320, 150, 80, 20],
@@ -788,13 +766,9 @@ GROUP BY hour
 ORDER BY total_bytes DESC;
 """
 
-# ==============================================================================
-# 2. Simulated SQL Query Results (Data Preparation)
-# This DataFrame simulates the output of the first SQL query (Hourly Alert Count).
-# ==============================================================================
 data_hourly = {
     'alert_hour': np.arange(24),
-    # Simulate a pattern: high alerts during working hours (9-17) and lowest at night
+    # a pattern: high alerts during working hours (9-17) and lowest at night
     'alert_count': [
         50, 45, 40, 35, 30, 60, # 00:00 - 05:00 (Night/Early Morning)
         120, 350, 600, 750, 800, 780, # 06:00 - 11:00 (Morning Spike)
@@ -893,10 +867,6 @@ HAVING COUNT(a.alert_id) > 1
 ORDER BY alert_count DESC;
 """
 
-# ==============================================================================
-# 2. Simulated SQL Query Results (Data Preparation)
-# This DataFrame simulates the output of the new SQL query (Asset/Rule Analysis).
-# ==============================================================================
 data_repeated_alerts = {
     'hostname': ['web_prod_01', 'hr_data_svr', 'exec_laptop_jdoe', 'db_stage_02', 'web_prod_01', 'exec_laptop_jdoe'],
     'detection_rule': ['External C2 Beacon', 'Unauthorized DB Access', 'Phishing Email Click', 'Repeated SQL Error', 'Directory Bruteforce', 'Low Scan Activity'],
@@ -1033,10 +1003,6 @@ ORDER BY
     incidents_per_employee DESC;
 """
 
-# ==============================================================================
-# 2. Simulated SQL Query Results (Data Preparation)
-# This DataFrame simulates the output of the new SQL query (Risk Density Analysis).
-# ==============================================================================
 data_risk = {
     'department_name': ['Engineering', 'Finance', 'Marketing', 'Sales', 'HR', 'Executive'],
     'high_severity_incidents': [50, 30, 15, 5, 2, 8],
@@ -1257,8 +1223,13 @@ dashboard_html = f"""<!DOCTYPE html>
             padding: 50px;
         }}
         
+        .charts-grid {{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }}
+        
         .chart-section {{
-            margin-bottom: 50px;
             background: white;
             border: 1px solid #e8ecef;
             border-radius: 8px;
@@ -1274,8 +1245,8 @@ dashboard_html = f"""<!DOCTYPE html>
         .chart-header {{
             background: #fafbfc;
             color: #2c3e50;
-            padding: 24px 30px;
-            font-size: 1.3em;
+            padding: 18px 24px;
+            font-size: 1.1em;
             font-weight: 500;
             border-bottom: 1px solid #e8ecef;
         }}
@@ -1284,7 +1255,7 @@ dashboard_html = f"""<!DOCTYPE html>
             width: 100%;
             display: block;
             background: white;
-            padding: 30px;
+            padding: 20px;
         }}
         
         footer {{
@@ -1337,7 +1308,7 @@ dashboard_html = f"""<!DOCTYPE html>
                 <div class="metric-label">Visualizations</div>
             </div>
             <div class="metric">
-                <div class="metric-value">14</div>
+                <div class="metric-value">12</div>
                 <div class="metric-label">Database Tables</div>
             </div>
             <div class="metric">
@@ -1347,44 +1318,46 @@ dashboard_html = f"""<!DOCTYPE html>
         </div>
 
         <div class="content">
-            <div class="chart-section">
-                <div class="chart-header">Q1: Departmental Risk Density – Quadrant Analysis</div>
-                <img src="charts/q1_department_risk.png" class="chart-img" alt="Q1 Chart">
-            </div>
+            <div class="charts-grid">
+                <div class="chart-section">
+                    <div class="chart-header">Q1: Departmental Risk Density</div>
+                    <img src="charts/q1_department_risk.png" class="chart-img" alt="Q1 Chart">
+                </div>
 
-            <div class="chart-section">
-                <div class="chart-header">Q2: Incident Response Timing – MTTD/MTTC/MTTR Analysis</div>
-                <img src="charts/q2_mttd_mttc_mttr.png" class="chart-img" alt="Q2 Chart">
-            </div>
+                <div class="chart-section">
+                    <div class="chart-header">Q2: MTTD/MTTC/MTTR Analysis</div>
+                    <img src="charts/q2_mttd_mttc_mttr.png" class="chart-img" alt="Q2 Chart">
+                </div>
 
-            <div class="chart-section">
-                <div class="chart-header">Q3: Threat Actor Mapping – Motivation & Sophistication</div>
-                <img src="charts/q3_threat_actors.png" class="chart-img" alt="Q3 Chart">
-            </div>
+                <div class="chart-section">
+                    <div class="chart-header">Q3: Threat Actor Mapping</div>
+                    <img src="charts/q3_threat_actors.png" class="chart-img" alt="Q3 Chart">
+                </div>
 
-            <div class="chart-section">
-                <div class="chart-header">Q4: Network Traffic Analysis – Traffic Breakdown & Alerts</div>
-                <img src="charts/q4_network_traffic.png" class="chart-img" alt="Q4 Chart">
-            </div>
+                <div class="chart-section">
+                    <div class="chart-header">Q4: Network Traffic Analysis</div>
+                    <img src="charts/q4_network_traffic.png" class="chart-img" alt="Q4 Chart">
+                </div>
 
-            <div class="chart-section">
-                <div class="chart-header">Q5: Alert Escalation Rate – Total vs Escalated by Severity</div>
-                <img src="charts/q5_escalation_rate.png" class="chart-img" alt="Q5 Chart">
-            </div>
+                <div class="chart-section">
+                    <div class="chart-header">Q5: Alert Escalation Rate</div>
+                    <img src="charts/q5_escalation_rate.png" class="chart-img" alt="Q5 Chart">
+                </div>
 
-            <div class="chart-section">
-                <div class="chart-header">Q6: User Alert & Incident Rates by Privilege Level</div>
-                <img src="charts/q6_user_privilege.png" class="chart-img" alt="Q6 Chart">
-            </div>
+                <div class="chart-section">
+                    <div class="chart-header">Q6: User Alerts by Privilege</div>
+                    <img src="charts/q6_user_privilege.png" class="chart-img" alt="Q6 Chart">
+                </div>
 
-            <div class="chart-section">
-                <div class="chart-header">Q7: IOC Confidence & Impact Analysis</div>
-                <img src="charts/q7_ioc_analysis.png" class="chart-img" alt="Q7 Chart">
-            </div>
+                <div class="chart-section">
+                    <div class="chart-header">Q7: IOC Confidence & Impact</div>
+                    <img src="charts/q7_ioc_analysis.png" class="chart-img" alt="Q7 Chart">
+                </div>
 
-            <div class="chart-section">
-                <div class="chart-header">Q8: Temporal Alert Spike Detection – 24-Hour Cycle</div>
-                <img src="charts/q8_temporal_spikes.png" class="chart-img" alt="Q8 Chart">
+                <div class="chart-section">
+                    <div class="chart-header">Q8: Temporal Alert Spikes</div>
+                    <img src="charts/q8_temporal_spikes.png" class="chart-img" alt="Q8 Chart">
+                </div>
             </div>
         </div>
 
